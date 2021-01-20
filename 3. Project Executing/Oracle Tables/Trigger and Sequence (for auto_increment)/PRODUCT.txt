@@ -1,0 +1,15 @@
+Drop sequence product_id_seq;
+CREATE SEQUENCE product_id_seq start with 1;
+
+CREATE OR REPLACE TRIGGER  "PRODUCT_BI" 
+BEFORE INSERT ON product
+FOR EACH ROW
+BEGIN
+  SELECT product_id_seq.nextval
+  INTO :new.product_id
+  FROM dual;
+END;
+
+/
+ALTER TRIGGER  "PRODUCT_BI" ENABLE
+/

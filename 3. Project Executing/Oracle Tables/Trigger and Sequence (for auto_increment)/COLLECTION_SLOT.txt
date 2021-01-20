@@ -1,0 +1,15 @@
+Drop sequence slot_id_seq;
+CREATE SEQUENCE slot_id_seq start with 1;
+
+CREATE OR REPLACE TRIGGER  "COLLECTION_SLOT_BI" 
+BEFORE INSERT ON collection_slot
+FOR EACH ROW
+BEGIN
+  SELECT slot_id_seq.nextval
+  INTO :new.slot_id
+  FROM dual;
+END;
+
+/
+ALTER TRIGGER  "COLLECTION_SLOT_BI" ENABLE
+/

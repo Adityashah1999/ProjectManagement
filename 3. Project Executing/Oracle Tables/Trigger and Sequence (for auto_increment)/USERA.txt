@@ -1,0 +1,15 @@
+Drop sequence user_id_seq;
+CREATE SEQUENCE user_id_seq start with 1;
+
+CREATE OR REPLACE TRIGGER  "USER_BI" 
+BEFORE INSERT ON usera
+FOR EACH ROW
+BEGIN
+  SELECT user_id_seq.nextval
+  INTO :new.user_id
+  FROM dual;
+END;
+
+/
+ALTER TRIGGER  "USER_BI" ENABLE
+/

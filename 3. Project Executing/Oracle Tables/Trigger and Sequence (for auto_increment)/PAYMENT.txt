@@ -1,0 +1,15 @@
+Drop sequence payment_id_seq;
+CREATE SEQUENCE payment_id_seq start with 1;
+
+CREATE OR REPLACE TRIGGER  "PAYMENT_BI" 
+BEFORE INSERT ON payment
+FOR EACH ROW
+BEGIN
+  SELECT payment_id_seq.nextval
+  INTO :new.payment_id
+  FROM dual;
+END;
+
+/
+ALTER TRIGGER  "PAYMENT_BI" ENABLE
+/

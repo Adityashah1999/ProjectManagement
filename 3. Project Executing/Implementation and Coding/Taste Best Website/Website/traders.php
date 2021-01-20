@@ -1,0 +1,16 @@
+<?php
+session_start();
+if (isset($_SESSION['customer_id']) || isset($_SESSION['admin_id']))
+{
+include("include/header.include.php");
+include("include/banner.include.php");
+include("include/traders/traderlist.include.php");
+include("include/footer.include.php");
+include("include/connection.php");
+}
+else{
+    
+    header('location: login.php');
+ 
+ }
+ 

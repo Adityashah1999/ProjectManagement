@@ -1,0 +1,15 @@
+Drop sequence category_id_seq;
+CREATE SEQUENCE category_id_seq start with 1;
+
+CREATE OR REPLACE TRIGGER  "CATEGORY_BI" 
+BEFORE INSERT ON category
+FOR EACH ROW
+BEGIN
+  SELECT category_id_seq.nextval
+  INTO :new.category_id
+  FROM dual;
+END;
+
+/
+ALTER TRIGGER  "CATEGORY_BI" ENABLE
+/

@@ -1,0 +1,15 @@
+Drop sequence shop_id_seq;
+CREATE SEQUENCE shop_id_seq start with 1;
+
+CREATE OR REPLACE TRIGGER  "SHOP_BI" 
+BEFORE INSERT ON shop
+FOR EACH ROW
+BEGIN
+  SELECT shop_id_seq.nextval
+  INTO :new.shop_id
+  FROM dual;
+END;
+
+/
+ALTER TRIGGER  "SHOP_BI" ENABLE
+/

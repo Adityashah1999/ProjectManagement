@@ -1,0 +1,16 @@
+function AUTHENTICATE_USER(p_username varchar2, p_password varchar2) 
+return boolean as  
+v_stat number (1);
+ 
+
+      
+     Begin 
+     Select 1 into v_stat
+     from usera
+     where upper(USER_EMAIL)=upper(p_username) and USER_PASSWORD = p_password and USER_TYPE = 'trader'; 
+     return true; 
+     exception 
+      When No_Data_Found Then 
+      return false;
+      
+   end AUTHENTICATE_USER;

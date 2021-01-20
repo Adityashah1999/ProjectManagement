@@ -1,0 +1,15 @@
+Drop sequence review_id_seq;
+CREATE SEQUENCE review_id_seq start with 1;
+
+CREATE OR REPLACE TRIGGER  "REVIEW_BI" 
+BEFORE INSERT ON review
+FOR EACH ROW
+BEGIN
+  SELECT review_id_seq.nextval
+  INTO :new.review_id
+  FROM dual;
+END;
+
+/
+ALTER TRIGGER  "REVIEW_BI" ENABLE
+/

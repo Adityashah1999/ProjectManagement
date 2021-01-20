@@ -1,0 +1,15 @@
+Drop sequence cart_id_seq;
+CREATE SEQUENCE cart_id_seq start with 1;
+
+CREATE OR REPLACE TRIGGER  "CART_BI" 
+BEFORE INSERT ON cart
+FOR EACH ROW
+BEGIN
+  SELECT cart_id_seq.nextval
+  INTO :new.cart_id
+  FROM dual;
+END;
+
+/
+ALTER TRIGGER  "CART_BI" ENABLE
+/

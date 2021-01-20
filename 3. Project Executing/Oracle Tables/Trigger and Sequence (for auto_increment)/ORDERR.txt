@@ -1,0 +1,15 @@
+Drop sequence order_id_seq;
+CREATE SEQUENCE order_id_seq start with 1;
+
+CREATE OR REPLACE TRIGGER  "ORDER_BI" 
+BEFORE INSERT ON orderr
+FOR EACH ROW
+BEGIN
+  SELECT order_id_seq.nextval
+  INTO :new.order_id
+  FROM dual;
+END;
+
+/
+ALTER TRIGGER  "ORDER_BI" ENABLE
+/

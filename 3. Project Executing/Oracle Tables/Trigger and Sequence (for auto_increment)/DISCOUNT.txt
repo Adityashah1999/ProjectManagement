@@ -1,0 +1,15 @@
+Drop sequence discount_id_seq;
+CREATE SEQUENCE discount_id_seq start with 1;
+
+CREATE OR REPLACE TRIGGER  "DISCOUNT_BI" 
+BEFORE INSERT ON discount
+FOR EACH ROW
+BEGIN
+  SELECT discount_id_seq.nextval
+  INTO :new.discount_id
+  FROM dual;
+END;
+
+/
+ALTER TRIGGER  "DISCOUNT_BI" ENABLE
+/
